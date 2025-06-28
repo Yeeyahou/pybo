@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">웹 스크래퍼</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">스크랩 시작</button>
+            </form>
+        </div>
+    </div>
+
+    {% if success %}
+        <div class="card mt-4">
+            <div class="card-header">
+                스크래핑 결과
+            </div>
+            <div class="card-body">
+                <pre>{{ content }}</pre>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="alert alert-danger mt-4">
+            오류 발생: {{ error }}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
